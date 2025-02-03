@@ -1,0 +1,13 @@
+Select 
+	t.date ,
+	sum(t.confirmed),
+	sum(t.deaths),
+	sum(t.recovered)
+from timeseries t 
+where t.id in (
+	select l.id 
+	from location l 
+	where l.iso_alpha_2  = "CO"
+)
+group by t.date
+order by t.date asc;
